@@ -103,7 +103,9 @@ summary::-webkit-details-marker{display:none}
 .btn--action:hover{background:var(--action-hover)}
 .btn--ghost{border-color:var(--field);color:var(--text);font-weight:500}
 .btn--ghost:hover{border-color:var(--muted)}
+/* на десктопе tel: бесполезен — показываем номер; на мобильном нужен глагол */
 .btn--tel{letter-spacing:.01em;white-space:nowrap}
+.btn--tel .tel-word{display:none}
 .btn--light{background:var(--text);color:#141618;border:0;padding:15px;width:100%}
 .btn--light:hover{background:var(--action);color:#fff}
 
@@ -385,6 +387,8 @@ img.cat__ph{width:100%;object-fit:cover}
   .hero__lead{font-size:15px;line-height:1.55;margin-bottom:20px}
   .hero__cta{margin-bottom:24px}
   .hero__cta .btn{flex:1;min-width:150px;padding:14px 18px;font-size:15px}
+  .btn--tel .tel-num{display:none}
+  .btn--tel .tel-word{display:inline}
   .stats{grid-template-columns:1fr 1fr}
   .stat{padding:14px 16px}
   .pick{padding:24px var(--pad)}
