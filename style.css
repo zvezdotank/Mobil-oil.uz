@@ -30,6 +30,7 @@
   --gold:#cca558;
   --gold-hover:#e2bd79;
   --gold-dim:#b78c41;
+  --mobil-red:#da291c;   /* красная «о» в логотипе */
 
   /* штриховка на местах фотографий */
   --hatch-bg:#191c1f;
@@ -140,9 +141,9 @@ summary::-webkit-details-marker{display:none}
   padding:22px var(--pad);border-bottom:1px solid var(--line);
 }
 .brand{display:flex;align-items:baseline;gap:12px;flex-shrink:0}
-.brand__name{font-size:21px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
+.brand__name{font-size:22px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
 a.brand__name{transition:color .15s}
-a.brand__name:hover{color:var(--gold)}
+a.brand__name:hover{opacity:.82}
 .brand__bar{width:1px;height:18px;background:var(--line-strong);align-self:center}
 .brand__sub{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
 
@@ -494,3 +495,8 @@ img.cat__ph{width:100%;object-fit:cover}
   font-size:clamp(15px,1.3vw,18px);font-weight:500;letter-spacing:0;
   line-height:1.4;color:var(--muted);
 }
+
+/* написание как на этикетке: синие буквы, красная «о» */
+.wm-b{color:var(--action)}
+.wm-r{color:var(--mobil-red)}
+.footer .wm-b,.footer .wm-r{font-weight:600}
