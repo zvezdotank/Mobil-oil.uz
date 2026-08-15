@@ -576,3 +576,14 @@ img.cat__ph{width:100%;object-fit:cover}
 }
 .mapbox__link:hover{color:var(--gold-hover)}
 @media (max-width:759px){.mapbox iframe{height:230px}}
+
+/* марки: подбор, а не витрина — поэтому текст, а не логотипы */
+.brands__list{display:flex;flex-wrap:wrap;gap:8px}
+.brands__list span{
+  font-size:15px;color:var(--muted);
+  border:1px solid var(--line-strong);border-radius:6px;
+  padding:9px 14px;transition:border-color .15s,color .15s;
+}
+.brands__list span:hover{border-color:var(--gold-dim);color:var(--text)}
+.brands__note{margin-top:22px;max-width:70ch;font-size:14px;line-height:1.6;color:var(--dim)}
+@media (max-width:759px){.brands__list span{font-size:14px;padding:8px 12px}}
