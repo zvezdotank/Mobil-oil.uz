@@ -39,6 +39,7 @@
 
   --sans:Archivo,Helvetica,Arial,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --wm:var(--sans);   /* своё написание: шрифт сайта, фирменные только цвета */
 
   --pad:32px;           /* горизонтальные поля секций */
   --section:56px;       /* вертикальный ритм секций */
@@ -496,7 +497,8 @@ img.cat__ph{width:100%;object-fit:cover}
   line-height:1.4;color:var(--muted);
 }
 
-/* написание как на этикетке: синие буквы, красная «о» */
+/* написание как на этикетке: геометрический гротеск, синие буквы, красная «о» */
+.wm{font-family:var(--wm);font-weight:700;letter-spacing:-.02em}
 .wm-b{color:var(--action)}
 .wm-r{color:var(--mobil-red)}
 .footer .wm-b,.footer .wm-r{font-weight:600}
