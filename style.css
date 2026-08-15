@@ -448,6 +448,10 @@ img.cat__ph{width:100%;object-fit:cover}
   }
   .bar__call{background:var(--action);color:#fff}
   .bar__write{border:1px solid var(--field);color:var(--text)}
+  /* открытая панель сама говорит, как её закрыть */
+  .bar details:not([open]) .w-close{display:none}
+  .bar details[open] .w-open{display:none}
+  .bar details[open] .bar__write{border-color:var(--gold-dim);color:var(--gold)}
   .bar__links{margin-top:10px}
   .bar__links a{
     background:var(--surface);padding:14px 16px;display:flex;justify-content:space-between;gap:12px;font-size:15px;
