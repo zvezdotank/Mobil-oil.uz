@@ -99,8 +99,15 @@ summary::-webkit-details-marker{display:none}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;
   font-size:16px;font-weight:600;padding:16px 26px;border:1px solid transparent;
-  cursor:pointer;transition:background-color .15s,color .15s,border-color .15s;
+  border-radius:6px;cursor:pointer;
+  transition:background-color .15s,color .15s,border-color .15s,
+             transform .12s ease-out,box-shadow .15s;
 }
+/* отклик на наведение: кнопка чуть приподнимается и отбрасывает тень */
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn--action:hover{box-shadow:0 8px 20px rgba(17,89,212,.38)}
+.btn--light:hover,.btn--ghost:hover{box-shadow:0 8px 20px rgba(0,0,0,.45)}
 .btn--action{background:var(--action);color:#fff}
 .btn--action:hover{background:var(--action-hover)}
 .btn--ghost{border-color:var(--field);color:var(--text);font-weight:500}
@@ -117,7 +124,7 @@ summary::-webkit-details-marker{display:none}
 .field__opt{font-style:normal;color:var(--faint);letter-spacing:.08em}
 .field input,.field select,.field textarea{
   border:1px solid var(--field);background:var(--bg);padding:13px 14px;font-size:15px;color:var(--text);
-  border-radius:0;
+  border-radius:6px;
 }
 .field select{appearance:none;
   background-image:linear-gradient(45deg,transparent 50%,var(--dim) 50%),linear-gradient(135deg,var(--dim) 50%,transparent 50%);
@@ -215,6 +222,7 @@ img.cat__ph{width:100%;object-fit:cover}
 .filters label{
   font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
   padding:9px 13px;cursor:pointer;border:1px solid var(--line-strong);color:var(--muted);
+  border-radius:5px;
   transition:background-color .15s,color .15s,border-color .15s;
 }
 .filters label:hover{border-color:var(--muted);color:var(--text)}
@@ -238,8 +246,9 @@ img.cat__ph{width:100%;object-fit:cover}
 .p-stock{text-align:right;font-family:var(--mono);font-size:12px;color:var(--gold)}
 .tfoot{padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:24px;background:var(--surface)}
 .tfoot span{font-size:14px;color:var(--dim)}
-.tfoot a{font-size:15px;font-weight:600;color:var(--gold)}
-.tfoot a:hover{color:var(--gold-hover)}
+.tfoot a:not(.btn){font-size:15px;font-weight:600;color:var(--gold)}
+.tfoot a:not(.btn):hover{color:var(--gold-hover)}
+.tfoot .btn{flex:none;padding:13px 22px;font-size:15px}
 
 /* фильтр без единой строчки JS: радиокнопка + :has() */
 .catalog:has(#f-motor:checked)  .prow[data-g]:not([data-g="Моторные"]),
@@ -306,7 +315,10 @@ img.cat__ph{width:100%;object-fit:cover}
 .map{display:block;width:100%;height:240px;object-fit:cover;border:1px solid var(--line);margin-top:28px}
 .order{display:grid;grid-template-columns:1fr 1fr;gap:13px}
 .order .wide{grid-column:span 2}
-.order button{grid-column:span 2;background:var(--action);color:#fff;border:0;padding:16px;font-size:16px;font-weight:600;cursor:pointer;transition:background-color .15s}
+.order button{grid-column:span 2;background:var(--action);color:#fff;border:0;padding:16px;font-size:16px;font-weight:600;
+  border-radius:6px;cursor:pointer;transition:background-color .15s,transform .12s ease-out,box-shadow .15s}
+.order button:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(17,89,212,.38)}
+.order button:active{transform:translateY(0)}
 .order button:hover{background:var(--action-hover)}
 
 /* ============ подвал ============ */
@@ -421,7 +433,8 @@ img.cat__ph{width:100%;object-fit:cover}
   .p-spec{grid-area:spec}
   .p-pack{grid-area:pack}
   .p-stock{grid-area:stock}
-  .tfoot{padding:16px var(--pad);display:grid;justify-items:start}
+  .tfoot{padding:16px var(--pad);display:grid;gap:14px;justify-items:stretch}
+  .tfoot .btn{width:100%}
   .filters{margin-top:16px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
   .filters label{white-space:nowrap}
 
@@ -469,6 +482,8 @@ img.cat__ph{width:100%;object-fit:cover}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *{transition-duration:.01ms !important}
+  /* кому движение мешает — тому только смена цвета, без подъёма */
+  .btn:hover,.order button:hover{transform:none}
 }
 
 /* ============ страница сервиса ============ */
@@ -509,3 +524,9 @@ img.cat__ph{width:100%;object-fit:cover}
 
 /* ловушка для роботов: человек этого поля не видит и не заполнит */
 .trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+
+/* соцсети в подвале: ярлыки вместо текста */
+.social{display:inline-flex;align-items:center;gap:14px}
+.social a{display:inline-flex;color:var(--dim);transition:color .15s}
+.social a:hover{color:var(--gold)}
+.social svg{width:22px;height:22px;display:block}
