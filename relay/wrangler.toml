@@ -1,6 +1,0 @@
-name = "mobil-oil-relay"
-main = "worker.js"
-compatibility_date = "2026-01-01"
-# BOT_TOKEN и CHAT_ID задаются секретами, в этом файле их нет и быть не должно:
-#   npx wrangler secret put BOT_TOKEN
-#   npx wrangler secret put CHAT_ID
