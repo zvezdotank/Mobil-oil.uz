@@ -8,6 +8,31 @@ const SITE = 'https://mobil-oil.uz';
 
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+
+    // Разовая помощь при настройке: показывает ID групп, куда добавлен бот.
+    // Работает только пока CHAT_ID не задан — после настройки сама отключается,
+    // поэтому токен не нужно вбивать в адресную строку браузера.
+    if (url.pathname === '/setup') {
+      if (env.CHAT_ID) return new Response('Уже настроено: CHAT_ID задан.', { status: 403 });
+      const r = await fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/getUpdates`);
+      const data = await r.json();
+      if (!data.ok) {
+        return new Response('Телеграм отклонил токен. Проверьте BOT_TOKEN.\n\n' +
+          JSON.stringify(data, null, 1), { headers: { 'content-type': 'text/plain; charset=utf-8' } });
+      }
+      const chats = {};
+      for (const u of data.result || []) {
+        const c = u.message?.chat || u.my_chat_member?.chat;
+        if (c) chats[c.id] = `${c.title || c.username || c.first_name || ''} (${c.type})`;
+      }
+      const found = Object.entries(chats).map(([id, t]) => `${id}   ${t}`).join('\n');
+      return new Response(
+        found ? 'Найденные чаты:\n\n' + found + '\n\nВозьмите ID группы (с минусом) и выполните:\n  npx wrangler secret put CHAT_ID'
+              : 'Чатов не видно. Добавьте бота в группу, напишите там любое сообщение и обновите страницу.',
+        { headers: { 'content-type': 'text/plain; charset=utf-8' } });
+    }
+
     if (request.method !== 'POST') return Response.redirect(SITE, 302);
 
     const form = await request.formData();
