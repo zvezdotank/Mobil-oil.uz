@@ -6,6 +6,14 @@
 
 const SITE = 'https://mobil-oil.uz';
 
+// Принимаем формы только со своего сайта: иначе адрес воркера найдут
+// и завалят группу мусором. Приём из sales-hub/tools/telegram-worker.js.
+const ALLOWED = ['https://mobil-oil.uz', 'https://www.mobil-oil.uz'];
+
+// Телеграм ломается на несбалансированных тегах, поэтому чистим всё,
+// что пришло от посетителя.
+const esc = (v) => String(v || '').replace(/[<>&]/g, (c) => ({ '<': '‹', '>': '›', '&': '&amp;' }[c]));
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -35,6 +43,11 @@ export default {
 
     if (request.method !== 'POST') return Response.redirect(SITE, 302);
 
+    const from = request.headers.get('Origin') || request.headers.get('Referer') || '';
+    if (!ALLOWED.some((o) => from.startsWith(o))) {
+      return new Response('Forbidden', { status: 403 });
+    }
+
     const form = await request.formData();
 
     // Ловушка для роботов: поле спрятано в вёрстке, человек его не заполнит.
@@ -54,10 +67,10 @@ export default {
       mileage: 'Пробег',
     };
 
-    const source = (form.get('_form') || 'форма').toString();
+    const source = esc((form.get('_form') || 'форма').toString());
     const lines = [`🔔 Заявка с сайта — ${source}`, ''];
     for (const [key, title] of Object.entries(titles)) {
-      const value = (form.get(key) || '').toString().trim();
+      const value = esc((form.get(key) || '').toString().trim());
       if (value) lines.push(`${title}: ${value}`);
     }
     lines.push('', new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Tashkent' }));
