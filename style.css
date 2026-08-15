@@ -344,7 +344,7 @@ img.cat__ph{width:100%;object-fit:cover}
 .mgr__who{display:flex;flex-direction:column;line-height:1.25;text-align:left}
 .mgr__who b{font-size:14px;font-weight:600}
 .mgr__who i{font-family:var(--mono);font-size:10px;letter-spacing:.08em;opacity:.9;font-style:normal}
-.mgr__phone{width:22px;height:22px;flex:none;margin-left:4px;opacity:.95}
+.mgr__phone{width:22px;height:22px;flex:none;opacity:.95;position:relative}
 .mgr__card{width:314px;background:var(--surface);border:1px solid var(--line-strong);box-shadow:0 20px 44px rgba(0,0,0,.5)}
 .mgr__head{display:flex;align-items:center;gap:14px;padding:20px;border-bottom:1px solid var(--line)}
 .mgr__head .mgr__ava{width:56px;height:56px;border:0}
@@ -530,3 +530,49 @@ img.cat__ph{width:100%;object-fit:cover}
 .social a{display:inline-flex;color:var(--dim);transition:color .15s}
 .social a:hover{color:var(--gold)}
 .social svg{width:22px;height:22px;display:block}
+
+/* от трубки расходятся круги — знак «можно звонить» */
+.mgr__ring{position:relative;display:inline-flex;flex:none;margin-left:4px}
+.mgr__ring::before,
+.mgr__ring::after{
+  content:"";position:absolute;inset:-5px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.6);
+  animation:callRing 2.6s cubic-bezier(.2,.6,.3,1) infinite;
+  pointer-events:none;
+}
+.mgr__ring::after{animation-delay:1.3s}
+@keyframes callRing{
+  0%   {transform:scale(.55);opacity:0}
+  20%  {opacity:.8}
+  100% {transform:scale(2);opacity:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .mgr__ring::before,.mgr__ring::after{animation:none;opacity:0}
+}
+
+/* график работы: две колонки, цифры моноширинным — читается сразу */
+.hours{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.hours__row{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  background:var(--bg);padding:11px 14px;font-size:15px;
+}
+.hours__row b{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--text);white-space:nowrap}
+.hours__row--off{color:var(--faint)}
+.hours__row--off b{color:var(--faint)}
+
+/* контакты: короткие подписи вместо длинных адресов */
+.clinks{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.clinks a{font-size:16px;color:var(--gold)}
+.clinks a:hover{color:var(--gold-hover)}
+
+/* карта офиса */
+.mapbox{margin-top:28px}
+.mapbox iframe{
+  display:block;width:100%;height:300px;border:1px solid var(--line);
+  border-radius:6px;background:var(--surface);
+}
+.mapbox__link{
+  display:inline-block;margin-top:12px;font-size:15px;font-weight:600;color:var(--gold);
+}
+.mapbox__link:hover{color:var(--gold-hover)}
+@media (max-width:759px){.mapbox iframe{height:230px}}
