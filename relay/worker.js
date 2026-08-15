@@ -81,12 +81,23 @@ export default {
     }
     lines.push('', new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Tashkent' }));
 
-    await fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ chat_id: env.CHAT_ID, text: lines.join('\n'), disable_web_page_preview: true }),
-    });
+    // If anything goes wrong (no CHAT_ID yet, Telegram down, bot kicked out)
+    // the visitor must be told, not shown a fake "thanks". A silently lost
+    // enquiry is worse than an honest failure.
+    if (!env.CHAT_ID) return Response.redirect(SITE + '/oshibka.html', 303);
 
-    return Response.redirect(SITE + '/spasibo.html', 303);
+    let ok = false;
+    try {
+      const r = await fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ chat_id: env.CHAT_ID, text: lines.join('\n'), disable_web_page_preview: true }),
+      });
+      ok = (await r.json()).ok === true;
+    } catch (e) {
+      ok = false;
+    }
+
+    return Response.redirect(SITE + (ok ? '/spasibo.html' : '/oshibka.html'), 303);
   },
 };

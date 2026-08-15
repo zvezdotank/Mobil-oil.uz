@@ -506,3 +506,6 @@ img.cat__ph{width:100%;object-fit:cover}
 .wm-b{color:var(--action)}
 .wm-r{color:var(--mobil-red)}
 .footer .wm-b,.footer .wm-r{font-weight:600}
+
+/* ловушка для роботов: человек этого поля не видит и не заполнит */
+.trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}

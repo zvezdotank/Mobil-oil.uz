@@ -96,7 +96,10 @@
       <div class="pick__title">Предложим решение под вашу задачу</div>
       <div class="pick__note">Инженер сверяет допуски и интервал замены, а не подбирает по вязкости на глаз.</div>
       <!-- форма не подключена: нужен action или обработчик -->
-      <form class="pick__form" method="post">
+      <form class="pick__form" method="post" action="https://mobil-oil-relay.zvezdotank.workers.dev/">
+          <input type="hidden" name="_form" value="Подбор по технике">
+          <input class="trap" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true">
+
         <label class="field">
           <span>Тип техники</span>
           <select name="type">
@@ -407,7 +410,10 @@
       <h2 class="h2" style="margin-bottom:10px">Заявка на поставку</h2>
       <p style="font-size:15px;color:var(--dim);line-height:1.55;margin-bottom:24px">Опишите задачу — вернёмся с подбором, ценой и сроком отгрузки.</p>
       <!-- форма не подключена: нужен action или обработчик -->
-      <form class="order" method="post">
+      <form class="order" method="post" action="https://mobil-oil-relay.zvezdotank.workers.dev/">
+        <input type="hidden" name="_form" value="Заявка на поставку">
+        <input class="trap" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true">
+
         <label class="field"><span>Контактное лицо</span><input name="name"></label>
         <label class="field"><span>Телефон</span><input name="phone" type="tel" placeholder="+998" required></label>
         <label class="field wide">

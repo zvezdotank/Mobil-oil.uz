@@ -98,7 +98,10 @@
       <div class="pick__title">Подберём масло и назовём время</div>
       <div class="pick__note">Скажите модель и пробег — посмотрим допуск производителя и наличие на складе.</div>
       <!-- форма не подключена: нужен action или обработчик -->
-      <form class="pick__form" method="post">
+      <form class="pick__form" method="post" action="https://mobil-oil-relay.zvezdotank.workers.dev/">
+          <input type="hidden" name="_form" value="Запись в сервис">
+          <input class="trap" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true">
+
         <label class="field">
           <span>Марка и модель</span>
           <input name="car" placeholder="например, Chevrolet Cobalt">
