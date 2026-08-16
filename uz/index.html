@@ -102,17 +102,19 @@
       <div class="pick__title">Vazifangizga mos yechim taklif qilamiz</div>
       <div class="pick__note">Muhandis ishlab chiqaruvchi talabi va almashtirish oraligʻini tekshiradi, qovushqoqlikka qarab chamalab tanlamaydi.</div>
       <form class="pick__form" method="post" action="https://mobil-oil-relay.zvezdotank.workers.dev/">
-        <input type="hidden" name="_form" value="Texnika boʻyicha tanlov (UZ)">
+        <!-- В телеграм-группу заявки уходят по-русски: посетитель видит
+             узбекский текст, а в заявке значение приходит русским. -->
+        <input type="hidden" name="_form" value="Подбор по технике (узб.)">
         <input type="hidden" name="_next" value="uz">
         <input class="trap" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <label class="field">
           <span>Texnika turi</span>
           <select name="type">
-            <option>Yengil avtomobillar</option>
-            <option>Yuk mashinalari va maxsus texnika</option>
-            <option>Sanoat uskunalari</option>
-            <option>Kompressorlar va gidravlika</option>
+            <option value="Легковой транспорт">Yengil avtomobillar</option>
+            <option value="Грузовики и спецтехника">Yuk mashinalari va maxsus texnika</option>
+            <option value="Промышленное оборудование">Sanoat uskunalari</option>
+            <option value="Компрессоры и гидравлика">Kompressorlar va gidravlika</option>
           </select>
         </label>
         <label class="field">
@@ -521,7 +523,7 @@
       <h2 class="h2" style="margin:30px 0 10px">Yetkazib berishga soʻrov</h2>
       <p style="font-size:15px;color:var(--dim);line-height:1.55;margin-bottom:24px">Vazifangizni yozing — tanlov, narx va joʻnatish muddati bilan qaytamiz.</p>
       <form class="order" method="post" action="https://mobil-oil-relay.zvezdotank.workers.dev/">
-        <input type="hidden" name="_form" value="Yetkazib berishga soʻrov (UZ)">
+        <input type="hidden" name="_form" value="Заявка на поставку (узб.)">
         <input type="hidden" name="_next" value="uz">
         <input class="trap" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true">
 
