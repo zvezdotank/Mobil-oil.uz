@@ -145,6 +145,7 @@ summary::-webkit-details-marker{display:none}
 
 .header{
   position:relative;                 /* якорь для выпадающего меню */
+  background:var(--deep);
   display:flex;align-items:center;justify-content:space-between;gap:24px;
   padding:22px var(--pad);border-bottom:1px solid var(--line);
 }
@@ -623,5 +624,13 @@ img.cat__ph{width:100%;object-fit:cover}
   .nextstep{padding:18px}
   .nextstep .btn{width:100%}
 }
-.footer a.footer__brand{display:inline-block;color:var(--text);transition:opacity .15s}
+.footer a.footer__brand{display:inline-block;color:var(--text);font-size:18px;letter-spacing:-.01em;transition:opacity .15s}
 .footer a.footer__brand:hover{opacity:.8;color:var(--text)}
+
+/* шапка липнет только на десктопе: на мобильном есть нижняя панель
+   со звонком, отдавать ей ещё и верх экрана расточительно */
+@media (min-width:1180px){
+  .header{position:sticky;top:0;z-index:20}
+  /* якоря не должны прятаться под липкой шапкой */
+  [id]{scroll-margin-top:104px}
+}
