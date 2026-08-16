@@ -561,12 +561,14 @@ img.cat__ph{width:100%;object-fit:cover}
 .hours__row--off b{color:var(--faint)}
 
 /* контакты: короткие подписи вместо длинных адресов */
-.clinks{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.clinks a{font-size:16px;color:var(--gold)}
-.clinks a:hover{color:var(--gold-hover)}
+.clinks{display:flex;align-items:center;gap:14px}
+.clinks a{display:inline-flex;color:var(--dim);transition:color .15s}
+.clinks a:hover{color:var(--gold)}
+.clinks svg{width:26px;height:26px;display:block}
 
 /* карта офиса */
 .mapbox{margin-top:28px}
+.mapbox--top{margin-top:0}
 .mapbox iframe{
   display:block;width:100%;height:300px;border:1px solid var(--line);
   border-radius:6px;background:var(--surface);
@@ -587,3 +589,19 @@ img.cat__ph{width:100%;object-fit:cover}
 .brands__list span:hover{border-color:var(--gold-dim);color:var(--text)}
 .brands__note{margin-top:22px;max-width:70ch;font-size:14px;line-height:1.6;color:var(--dim)}
 @media (max-width:759px){.brands__list span{font-size:14px;padding:8px 12px}}
+
+/* развязка блока «Подбор по марке»: человек, а не ещё один заголовок */
+.nextstep{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  margin-top:28px;padding:20px 22px;
+  border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);
+}
+.nextstep__ava{width:52px;height:52px;flex:none;border-radius:50%;object-fit:cover}
+.nextstep__text{flex:1;min-width:260px;display:flex;flex-direction:column;gap:6px}
+.nextstep__text b{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.nextstep__text span{font-size:14px;line-height:1.55;color:var(--dim);max-width:62ch}
+.nextstep .btn{flex:none}
+@media (max-width:759px){
+  .nextstep{padding:18px}
+  .nextstep .btn{width:100%}
+}
