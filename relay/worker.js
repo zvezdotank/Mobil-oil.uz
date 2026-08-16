@@ -56,11 +56,16 @@ export default {
 
     const form = await request.formData();
 
+    // Which language version the visitor came from, so the thank-you and
+    // failure pages come back in that language. Only the literal 'uz' is
+    // honoured, so a crafted _next value can never redirect off-site.
+    const lang = (form.get('_next') || '').toString() === 'uz' ? '/uz' : '';
+
     // Honeypot: the field is hidden in the markup, a human never fills it.
-    if (form.get('company_site')) return Response.redirect(SITE + '/spasibo.html', 303);
+    if (form.get('company_site')) return Response.redirect(SITE + lang + '/spasibo.html', 303);
 
     const phone = (form.get('phone') || '').toString().trim();
-    if (!phone) return Response.redirect(SITE + '/?error=phone', 303);
+    if (!phone) return Response.redirect(SITE + lang + '/?error=phone', 303);
 
     const titles = {
       name: '\u041a\u043e\u043d\u0442\u0430\u043a\u0442\u043d\u043e\u0435 \u043b\u0438\u0446\u043e',
@@ -84,7 +89,7 @@ export default {
     // If anything goes wrong (no CHAT_ID yet, Telegram down, bot kicked out)
     // the visitor must be told, not shown a fake "thanks". A silently lost
     // enquiry is worse than an honest failure.
-    if (!env.CHAT_ID) return Response.redirect(SITE + '/oshibka.html', 303);
+    if (!env.CHAT_ID) return Response.redirect(SITE + lang + '/oshibka.html', 303);
 
     let ok = false;
     try {
@@ -98,6 +103,6 @@ export default {
       ok = false;
     }
 
-    return Response.redirect(SITE + (ok ? '/spasibo.html' : '/oshibka.html'), 303);
+    return Response.redirect(SITE + lang + (ok ? '/spasibo.html' : '/oshibka.html'), 303);
   },
 };

@@ -165,6 +165,20 @@ a.brand__name:hover{opacity:.82}
 .hcall__hours{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
 .hcall .btn{font-size:15px;padding:12px 18px}
 
+/* переключатель языка: две сцепленные кнопки, активная залита */
+.lang{
+  display:flex;flex-shrink:0;
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+}
+.lang > *{
+  padding:7px 10px;border:1px solid var(--line-strong);color:var(--dim);
+  line-height:1;transition:color .15s,border-color .15s,background-color .15s;
+}
+.lang > :first-child{border-radius:5px 0 0 5px}
+.lang > :last-child{border-radius:0 5px 5px 0;margin-left:-1px}
+.lang a:hover{color:var(--text);border-color:var(--field)}
+.lang [aria-current]{color:var(--text);background:var(--line-soft);border-color:var(--field);position:relative}
+
 .burger{display:none}
 
 /* ============ первый экран ============ */
@@ -252,10 +266,11 @@ img.cat__ph{width:100%;object-fit:cover}
 .tfoot .btn{flex:none;padding:13px 22px;font-size:15px}
 
 /* фильтр без единой строчки JS: радиокнопка + :has() */
-.catalog:has(#f-motor:checked)  .prow[data-g]:not([data-g="Моторные"]),
-.catalog:has(#f-truck:checked)  .prow[data-g]:not([data-g="Грузовые"]),
-.catalog:has(#f-trans:checked)  .prow[data-g]:not([data-g="Трансмиссионные"]),
-.catalog:has(#f-indus:checked)  .prow[data-g]:not([data-g="Промышленные"]){display:none}
+/* значения нейтральные, а не русские: та же разметка работает на обеих языковых версиях */
+.catalog:has(#f-motor:checked)  .prow[data-g]:not([data-g="motor"]),
+.catalog:has(#f-truck:checked)  .prow[data-g]:not([data-g="truck"]),
+.catalog:has(#f-trans:checked)  .prow[data-g]:not([data-g="trans"]),
+.catalog:has(#f-indus:checked)  .prow[data-g]:not([data-g="indus"]){display:none}
 
 /* ============ промышленные и подлинность ============ */
 .row2{background:var(--bg);padding:16px 18px;display:flex;justify-content:space-between;gap:16px;font-size:15px}
@@ -404,7 +419,10 @@ img.cat__ph{width:100%;object-fit:cover}
   .header{padding:14px var(--pad);background:var(--deep)}
   .brand__bar,.brand__sub,.hcall{display:none}
   .brand__name{font-size:16px}
-  .burger{margin-left:auto}
+  /* телефон прячем, а язык оставляем — иначе переключиться неоткуда */
+  .lang{margin-left:auto}
+  .lang > *{padding:6px 9px;font-size:11px}
+  .burger{margin-left:6px}
 
   .hero__main{padding:28px var(--pad) 24px}
   .hero .h1{margin:14px 0}

@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /spasibo.html
 Disallow: /oshibka.html
+Disallow: /uz/spasibo.html
+Disallow: /uz/oshibka.html
 
 Sitemap: https://mobil-oil.uz/sitemap.xml
