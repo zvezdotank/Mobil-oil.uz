@@ -308,7 +308,7 @@ img.cat__ph{width:100%;object-fit:cover}
 .qa__a{font-size:15px;line-height:1.6;color:var(--dim);margin-top:12px;max-width:680px;text-wrap:pretty}
 
 /* ============ контакты ============ */
-.contacts{grid-template-columns:1fr 1fr;border-bottom:0}
+.contacts{grid-template-columns:.85fr 1.15fr;border-bottom:0}
 .cblock + .cblock{margin-top:20px}
 .cblock__l{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
 .cblock__phone{font-size:clamp(22px,2.4vw,26px);font-weight:700;letter-spacing:-.02em}
@@ -586,15 +586,27 @@ img.cat__ph{width:100%;object-fit:cover}
 @media (max-width:759px){.mapbox iframe{height:230px}}
 
 /* марки: подбор, а не витрина — поэтому текст, а не логотипы */
-.brands__list{display:flex;flex-wrap:wrap;gap:8px}
-.brands__list span{
+.marquee{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+}
+.marquee__track{display:flex;gap:8px;width:max-content;animation:marq 46s linear infinite}
+.marquee:hover .marquee__track{animation-play-state:paused}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .marquee{-webkit-mask-image:none;mask-image:none}
+  .marquee__track{animation:none;flex-wrap:wrap;width:auto}
+  .marquee__track [aria-hidden="true"]{display:none}
+}
+.marquee__track span{
   font-size:15px;color:var(--muted);
   border:1px solid var(--line-strong);border-radius:6px;
   padding:9px 14px;transition:border-color .15s,color .15s;
 }
-.brands__list span:hover{border-color:var(--gold-dim);color:var(--text)}
+.marquee__track span:hover{border-color:var(--gold-dim);color:var(--text)}
 .brands__note{margin-top:22px;max-width:70ch;font-size:14px;line-height:1.6;color:var(--dim)}
-@media (max-width:759px){.brands__list span{font-size:14px;padding:8px 12px}}
+@media (max-width:759px){.marquee__track span{font-size:14px;padding:8px 12px}}
 
 /* развязка блока «Подбор по марке»: человек, а не ещё один заголовок */
 .nextstep{
