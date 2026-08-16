@@ -577,13 +577,13 @@ img.cat__ph{width:100%;object-fit:cover}
 .mapbox{margin-top:28px}
 .mapbox--top{margin-top:0}
 .mapbox__map{display:block;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.mapbox__map img{display:block;width:100%;height:300px;object-fit:cover}
+/* карту показываем целиком: подписи улиц и станций у краёв нельзя обрезать */
+.mapbox__map img{display:block;width:100%;height:auto}
 .mapbox__map:hover{border-color:var(--gold-dim)}
 .mapbox__link{
   display:inline-block;margin-top:12px;font-size:15px;font-weight:600;color:var(--gold);
 }
 .mapbox__link:hover{color:var(--gold-hover)}
-@media (max-width:759px){.mapbox__map img{height:230px}}
 
 /* марки: подбор, а не витрина — поэтому текст, а не логотипы */
 .marquee{

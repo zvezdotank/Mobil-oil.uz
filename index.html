@@ -502,8 +502,12 @@
       <div class="mapbox mapbox--top">
         <a class="mapbox__map" href="https://yandex.com/maps/org/tegeta_motors/206284429216/" rel="noopener"
            aria-label="Открыть карту в Яндекс Картах">
-          <img src="img/map.svg" width="1480" height="600" loading="lazy"
-               alt="Схема проезда: склад и сервис на Ферганском шоссе, 570, Мирабадский район, Ташкент">
+          <picture>
+            <!-- на телефоне под карту ~340 px: узкий кадр, иначе подписи нечитаемы -->
+            <source media="(max-width:759px)" srcset="img/map-mobile.svg" width="380" height="380">
+            <img src="img/map.svg" width="760" height="400" loading="lazy"
+                 alt="Схема проезда: склад и сервис на Ферганском шоссе, 570, Мирабадский район, Ташкент — между станциями метро Матонат, Киёт и Рахат, у Ханабадтепа проспекта">
+          </picture>
         </a>
         <a class="mapbox__link" href="https://yandex.com/maps/org/tegeta_motors/206284429216/"
            rel="noopener">Открыть в Яндекс Картах и построить маршрут</a>

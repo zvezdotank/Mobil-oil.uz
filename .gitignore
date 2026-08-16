@@ -4,3 +4,6 @@
 # что на сайте выдумано; на боевом домене этому не место
 README.md
 photo-brief.md
+
+# кэш ответов Overpass — 900 КБ сырых данных; tools/build-map.py скачает заново
+tools/osm-*.json
