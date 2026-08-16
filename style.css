@@ -1,3 +1,24 @@
+/* ============ шрифты ============
+   Свои файлы вместо Google Fonts: это убирает два чужих домена
+   с критического пути (DNS + TLS на каждый) и блокирующий CSS.
+   Оба шрифта переменные и урезаны до символов, которые есть на сайте.
+   Archivo кириллицы не содержит вовсе — русский текст всегда шёл
+   системным Helvetica/Arial, поэтому в его файле только латиница. */
+@font-face{
+  font-family:Archivo;
+  src:url(/fonts/archivo.woff2) format('woff2');
+  font-weight:400 700;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'JetBrains Mono';
+  src:url(/fonts/mono.woff2) format('woff2');
+  font-weight:400 500;
+  font-style:normal;
+  font-display:swap;
+}
+
 /* ============ токены ============ */
 :root{
   /* поверхности: от самой тёмной к светлой */
