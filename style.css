@@ -271,6 +271,8 @@ img.cat__ph{width:100%;object-fit:cover}
 
 /* ============ о компании, клиенты, кейсы ============ */
 .about{grid-template-columns:.9fr 1.1fr}
+.about > .sec{display:flex;flex-direction:column}
+.about .shot{margin-top:auto !important;padding-top:22px}
 .about p + p{margin-top:20px}
 .logos{grid-template-columns:repeat(4,1fr);margin-bottom:24px}
 .logos div{
