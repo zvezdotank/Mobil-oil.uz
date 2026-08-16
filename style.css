@@ -605,3 +605,5 @@ img.cat__ph{width:100%;object-fit:cover}
   .nextstep{padding:18px}
   .nextstep .btn{width:100%}
 }
+.footer__brand{display:inline-block;transition:opacity .15s}
+.footer__brand:hover{opacity:.8}
