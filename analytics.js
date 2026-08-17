@@ -64,12 +64,42 @@ var GA_ID = '';
     var href = a.getAttribute('href') || '';
     var place = placeOf(a);
 
+    // переключатель языка: активная сторона — <span>, кликается только соседняя <a>
+    if (a.closest('.lang')) {
+      send('switch_language', {
+        from: document.documentElement.lang || 'ru',
+        to: a.getAttribute('hreflang') || 'ru'
+      });
+      return;
+    }
+
     if (href.indexOf('tel:') === 0)            send('click_phone',     { placement: place });
     else if (href.indexOf('mailto:') === 0)    send('click_email',     { placement: place });
     else if (href.indexOf('t.me/') > -1)       send('click_telegram',  { placement: place });
     else if (href.indexOf('uzum.uz') > -1)     send('click_uzum',      { placement: place });
     else if (href.indexOf('instagram.com') > -1) send('click_instagram', { placement: place });
     else if (href.indexOf('yandex.com/maps') > -1) send('click_map',   { placement: place });
+  }, true);
+
+  /* Что человек раскрывал на странице. Событие toggle не всплывает,
+     поэтому слушаем на этапе погружения — так один обработчик ловит все. */
+  document.addEventListener('toggle', function (e) {
+    var d = e.target;
+    if (!d.open) return;                      // закрытие не считаем
+    if (d.classList.contains('qa')) {
+      var q = d.querySelector('summary');
+      send('faq_open', { question: q ? q.textContent.replace('+', '').trim().slice(0, 90) : '' });
+    } else if (d.closest('.mgr')) {
+      send('manager_open', {});
+    }
+  }, true);
+
+  /* Фильтр каталога: по какой группе товаров смотрят чаще. */
+  document.addEventListener('change', function (e) {
+    var i = e.target;
+    if (!i || i.name !== 'filter') return;
+    var l = document.querySelector('label[for="' + i.id + '"]');
+    send('catalog_filter', { group: l ? l.textContent.trim() : i.id });
   }, true);
 
   /* Отправка формы. Имя формы лежит в скрытом поле _form — том же,
