@@ -95,6 +95,10 @@ summary::-webkit-details-marker{display:none}
 .sec{padding:var(--section) var(--pad);border-bottom:1px solid var(--line)}
 .split{display:grid;border-bottom:1px solid var(--line)}
 .split > * + *{border-left:1px solid var(--line)}
+/* Две равные колонки. Отдельным классом, а не инлайновым стилем:
+   инлайн сильнее медиазапроса, и на телефоне колонки не схлопывались —
+   содержимое не влезало в экран и появлялась горизонтальная прокрутка. */
+.split--half{grid-template-columns:1fr 1fr}
 .panel{background:var(--surface)}
 
 /* сетки «в одну линию»: фон просвечивает через зазор в 1px */
@@ -210,7 +214,19 @@ a.brand__name:hover{opacity:.82}
   position:absolute;z-index:0;right:8px;bottom:-26px;width:380px;height:auto;
   pointer-events:none;
 }
-@media (max-width:1179px){.hero__prod{display:none}.hero__text{max-width:none}}
+/* Раньше на всех экранах уже планшетного канистра просто пряталась —
+   первый экран оставался без товара. Теперь: на планшете та же
+   композиция, что на десктопе, только мельче; на телефоне сбоку места
+   нет, поэтому канистра встаёт в поток под кнопкой, по центру. */
+@media (max-width:1179px){
+  .hero__text{max-width:min(560px,62%)}
+  .hero__prod{width:min(320px,34vw)}
+}
+@media (max-width:759px){
+  .hero__text{max-width:none}
+  /* у .hero__cta уже есть отступ снизу — свой не добавляем */
+  .hero__prod{position:static;width:min(230px,58vw);margin:0 auto}
+}
 .hero__main{padding:56px var(--pad) 44px}
 .tare{max-width:450px;color:var(--line-strong)}
 .tare svg{width:100%;height:auto;display:block}
@@ -409,7 +425,7 @@ img.cat__ph{width:100%;object-fit:cover}
 @media (max-width:1179px){
   :root{--pad:24px;--section:44px}
   .nav{display:none}
-  .hero,.about,.faq,.contacts{grid-template-columns:1fr}
+  .hero,.about,.faq,.contacts,.split--half{grid-template-columns:1fr}
   .split > * + *{border-left:0;border-top:1px solid var(--line)}
   .hero__main,.pick,.faq__intro,.faq__list{padding-left:var(--pad);padding-right:var(--pad)}
   .cats,.steps,.logos{grid-template-columns:repeat(2,1fr)}
@@ -486,7 +502,12 @@ img.cat__ph{width:100%;object-fit:cover}
 
   .docs{grid-template-columns:1fr}
   .docs .ph,.docs img{height:160px}
-  .steps,.logos{grid-template-columns:1fr 1fr}
+  /* Шаги — в один столбец. В двух колонках на текст оставалось 120px,
+     а «корпоративному» требует 143: колонка распирала сетку шире
+     экрана и появлялась горизонтальная прокрутка. Да и описания
+     сыпались лесенкой по десятку символов. */
+  .steps,.steps--six{grid-template-columns:1fr}
+  .logos{grid-template-columns:1fr 1fr}
   .case{grid-template-columns:1fr;gap:10px}
   .order{grid-template-columns:1fr}
   .order .wide,.order button{grid-column:span 1}
@@ -546,7 +567,7 @@ img.cat__ph{width:100%;object-fit:cover}
 .same span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
 .steps--six{grid-template-columns:repeat(3,1fr)}
 @media (max-width:1179px){.steps--six{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:759px){.steps--six{grid-template-columns:1fr 1fr}}
+@media (max-width:759px){.steps--six{grid-template-columns:1fr}}
 
 .crosslink{
   display:inline-flex;align-items:center;gap:10px;
