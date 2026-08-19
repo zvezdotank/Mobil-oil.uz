@@ -141,10 +141,10 @@ def collect():
                 run.append(p)
                 continue
             if len(run) > 1:
-                eps = 3.0 if faint else (1.2 if hw == 'secondary' else 0.8)
+                eps = 5.0 if faint else (1.6 if hw == 'secondary' else 0.9)
                 pts = thin(run, eps)
                 if len(pts) > 1:
-                    fmt = '{:.0f} {:.0f}' if faint else '{:.1f} {:.1f}'
+                    fmt = '{:.0f} {:.0f}'
                     d = 'M' + ' L'.join(fmt.format(x, y) for x, y in pts)
                     if river:
                         rivers.append(d)
